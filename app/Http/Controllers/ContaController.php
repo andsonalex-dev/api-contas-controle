@@ -27,10 +27,11 @@ class ContaController extends Controller
                 'nome' => 'required|string|max:255',
                 'tipo' => 'required|string|max:100',
                 'descricao' => 'nullable|string',
-                'instituicao' => 'required|string|max:255'
+                'instituicao' => 'required|string|max:255',
+                'categoria_id' => 'nullable|exists:categorias,id'
             ]);
 
-            $conta = $this->contaService->create($request->only('nome', 'tipo', 'descricao', 'instituicao'));
+            $conta = $this->contaService->create($request->only('nome', 'tipo', 'descricao', 'instituicao', 'categoria_id'));
 
             return response()->json($conta, 201);
         } catch (\Exception $e) {
